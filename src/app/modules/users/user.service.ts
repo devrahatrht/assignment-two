@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { UserModel } from '../user.model';
 import { User } from './user.interface';
 

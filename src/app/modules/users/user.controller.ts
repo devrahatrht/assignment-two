@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { userServices } from './user.service';
 import userValidationSchema from './user.validation';
@@ -34,6 +35,7 @@ const getAllUsers = async (req: Request, res: Response) => {
       message: 'All users fetched successfully',
       data: result,
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     res.status(500).json({
       success: false,
@@ -51,7 +53,7 @@ const getSingleUser = async (req: Request, res: Response) => {
 
     if (!user) throw new Error('User not found.');
 
-    const result = await userServices.getSingleUserFromDB(userId);
+    const result = await userServices.getSingleUserFromDB(Number(userId));
     res.status(200).json({
       success: true,
       message: 'user fetched successfully',
@@ -80,7 +82,7 @@ const updateSingleUser = async (req: Request, res: Response) => {
     // Get updated fields from the request body or other source
     const users = req.body; // Assuming the updated fields are in the request body
 
-    const result = await userServices.updateUserFromDB(userId, users);
+    const result = await userServices.updateUserFromDB(Number(userId), users);
 
     res.status(200).json({
       success: true,
@@ -103,7 +105,7 @@ const deleteUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
 
-    const result = await userServices.deleteUserFromDB(userId);
+    const result = await userServices.deleteUserFromDB(Number(userId));
     res.status(200).json({
       success: true,
       message: 'user deleted successfully!',
