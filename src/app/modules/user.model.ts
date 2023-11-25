@@ -1,5 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { Address, FullName, Order, User } from './users/user.interface';
+import bcrypt from 'bcrypt';
+import config from '../config';
 
 const fullNameSchema = new Schema<FullName>({
   firstName: { type: String, required: true },
@@ -39,6 +41,34 @@ const userSchema = new Schema<User>({
   hobbies: [{ type: String, required: true }],
   address: addressSchema,
   orders: [orderSchema],
+  isDeleted: { type: Boolean, default: false },
+});
+
+userSchema.pre('save', async function (next) {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const user = this;
+  user.password = await bcrypt.hash(
+    user.password,
+    Number(config.bcrypt_salt_rounds),
+  );
+  next();
+});
+
+userSchema.post('save', function (doc, next) {
+  doc.password = '';
+  next();
+});
+
+// query Middleware
+
+userSchema.pre('find', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+userSchema.pre('findOne', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
 });
 
 export const UserModel = model<User>('User', userSchema);

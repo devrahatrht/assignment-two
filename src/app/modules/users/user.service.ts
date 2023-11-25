@@ -16,8 +16,28 @@ const getSingleUserFromDB = async (userId: number) => {
   return result;
 };
 
+const deleteUserFromDB = async (userId: number) => {
+  const result = await UserModel.updateOne({ userId }, { isDeleted: true });
+  return result;
+};
+
+const updateUserFromDB = async (userId: number, users: any) => {
+  if (users && Object.keys(users).length > 0) {
+    // Assuming UserModel is a Mongoose model
+    const result = await UserModel.updateOne({ userId }, { $set: users });
+    return result;
+  } else {
+    // Handle the case where updatedFields is undefined or empty
+    throw new Error('Invalid or empty update fields');
+  }
+  // const result = await UserModel.updateOne({ userId }, { $set: users });
+  // return result;
+};
+
 export const userServices = {
   createUserFromDB,
   getAllUsersFromDB,
   getSingleUserFromDB,
+  deleteUserFromDB,
+  updateUserFromDB,
 };

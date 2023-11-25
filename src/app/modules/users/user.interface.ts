@@ -5,15 +5,15 @@ export type Order = {
 };
 
 export type FullName = {
-    firstName: string;
-    lastName: string
-}
+  firstName: string;
+  lastName: string;
+};
 
 export type Address = {
-    street: string;
-    city: string;
-    country: string;
-}
+  street: string;
+  city: string;
+  country: string;
+};
 
 export type User = {
   userId: number;
@@ -26,4 +26,5 @@ export type User = {
   hobbies: string[];
   address: Address;
   orders?: Order[];
+  isDeleted: boolean;
 };
