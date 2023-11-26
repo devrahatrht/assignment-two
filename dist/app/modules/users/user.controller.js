@@ -35,24 +35,32 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
 });
+// get all users
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield user_service_1.userServices.getAllUsersFromDB();
+        if (result.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'no user found',
+                data: [],
+            });
+        }
         res.status(200).json({
             success: true,
-            message: 'All users fetched successfully',
+            message: 'all users fetched successfully',
             data: result,
         });
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Something went wrong',
+            message: 'something went wrong!',
             error: error.message,
         });
     }
 });
+// get single user
 const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.params;
@@ -77,19 +85,19 @@ const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         });
     }
 });
+// update user data
 const updateSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.params;
         const user = yield user_model_1.UserModel.findOne({ userId });
         if (!user)
             throw new Error('User not found.');
-        // Get updated fields from the request body or other source
-        const users = req.body; // Assuming the updated fields are in the request body
+        const users = req.body;
         const result = yield user_service_1.userServices.updateUserFromDB(Number(userId), users);
         res.status(200).json({
             success: true,
             message: 'User updated successfully',
-            data: result,
+            data: result && result.acknowledged ? 'user updated successfully' : result,
         });
     }
     catch (err) {

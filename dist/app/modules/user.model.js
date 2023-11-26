@@ -65,6 +65,18 @@ userSchema.post('save', function (doc, next) {
     doc.password = '';
     next();
 });
+userSchema.pre('find', function (next) {
+    this.find({ isDeleted: { $ne: true } });
+    // Exclude the 'password' field from the query results
+    this.select('-password');
+    next();
+});
+userSchema.pre('findOne', function (next) {
+    this.find({ isDeleted: { $ne: true } });
+    // Exclude the 'password' field from the query results
+    this.select('-password');
+    next();
+});
 // query Middleware
 userSchema.pre('find', function (next) {
     this.find({ isDeleted: { $ne: true } });
