@@ -2,12 +2,12 @@
 
 #### `npm run start`
 
-This command run node /dist/server.js file
+This command run node /dist/server.js file /n
 Open [http://localhost:5000](http://localhost:5000) to view it in browser.
 
 #### `npm run start:dev`
 
-This command run project src/server.ts for development.
+This command run project src/server.ts for development. /n
 Open for development [http://localhost:5000](http://localhost:5000) to view it in browser.
 
 #### `npm run lint`
