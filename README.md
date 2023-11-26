@@ -1,4 +1,8 @@
-# Getting Started with assignment-two project
+## Getting Started with assignment-two project
+
+#### `npm run build`
+
+This command .ts file converted to .js file 
 
 #### `npm run start`
 
