@@ -26,24 +26,32 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
+// get all users
 const getAllUsers = async (req: Request, res: Response) => {
   try {
     const result = await userServices.getAllUsersFromDB();
-
+    if (result.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'no user found',
+        data: [],
+      });
+    }
     res.status(200).json({
       success: true,
-      message: 'All users fetched successfully',
+      message: 'all users fetched successfully',
       data: result,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: 'Something went wrong',
+      message: 'something went wrong!',
       error: error.message,
     });
   }
 };
+
+// get single user
 
 const getSingleUser = async (req: Request, res: Response) => {
   try {
