@@ -79,6 +79,8 @@ const getSingleUser = async (req: Request, res: Response) => {
   }
 };
 
+// update user data
+
 const updateSingleUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
@@ -87,15 +89,15 @@ const updateSingleUser = async (req: Request, res: Response) => {
 
     if (!user) throw new Error('User not found.');
 
-    // Get updated fields from the request body or other source
-    const users = req.body; // Assuming the updated fields are in the request body
+    const users = req.body;
 
     const result = await userServices.updateUserFromDB(Number(userId), users);
 
     res.status(200).json({
       success: true,
       message: 'User updated successfully',
-      data: result,
+      data:
+        result && result.acknowledged ? 'user updated successfully' : result,
     });
   } catch (err: any) {
     res.status(500).json({
