@@ -9,7 +9,25 @@ app.use(cors());
 app.use('/api', userRoutes);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
+  res.send('Assignment Two Server Running');
+});
+
+app.all('*', (req: Request, res: Response) => {
+  res.status(400).json({
+    success: false,
+    message: 'Route is not found',
+  });
+});
+
+// global error handler
+
+app.use((error: unknown, req: Request, res: Response) => {
+  if (error) {
+    res.status(400).json({
+      success: false,
+      message: 'something went wrong',
+    });
+  }
 });
 
 export default app;
