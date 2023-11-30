@@ -6,9 +6,9 @@ import { UserModel } from '../user.model';
 
 const createUser = async (req: Request, res: Response) => {
   try {
-    const { user: userData } = req.body;
+    const user = req.body;
 
-    const zodParsedData = userValidationSchema.parse(userData);
+    const zodParsedData = userValidationSchema.parse(user);
 
     const result = await userServices.createUserFromDB(zodParsedData);
 
@@ -83,7 +83,7 @@ const getSingleUser = async (req: Request, res: Response) => {
 
 const updateSingleUser = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const userId = req.params.userId;
 
     const user = await UserModel.findOne({ userId });
 

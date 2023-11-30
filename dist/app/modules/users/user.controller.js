@@ -18,8 +18,8 @@ const user_validation_1 = __importDefault(require("./user.validation"));
 const user_model_1 = require("../user.model");
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { user: userData } = req.body;
-        const zodParsedData = user_validation_1.default.parse(userData);
+        const user = req.body;
+        const zodParsedData = user_validation_1.default.parse(user);
         const result = yield user_service_1.userServices.createUserFromDB(zodParsedData);
         res.status(200).json({
             success: true,
@@ -88,7 +88,7 @@ const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 // update user data
 const updateSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId } = req.params;
+        const userId = req.params.userId;
         const user = yield user_model_1.UserModel.findOne({ userId });
         if (!user)
             throw new Error('User not found.');
