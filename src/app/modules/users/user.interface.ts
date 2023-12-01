@@ -26,5 +26,4 @@ export type User = {
   hobbies: string[];
   address: Address;
   orders?: Order[];
-  isDeleted: boolean;
 };

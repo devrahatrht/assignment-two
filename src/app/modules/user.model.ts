@@ -41,7 +41,6 @@ const userSchema = new Schema<User>({
   hobbies: [{ type: String, required: true }],
   address: addressSchema,
   orders: [orderSchema],
-  isDeleted: { type: Boolean, default: false },
 });
 
 userSchema.pre('save', async function (next) {

@@ -34,6 +34,5 @@ const userValidationSchema = zod_1.z.object({
     hobbies: zod_1.z.array(zod_1.z.string({ required_error: 'Hobbies are required' })),
     address: addressValidationSchema,
     orders: zod_1.z.array(orderValidationSchema).optional(),
-    isDeleted: zod_1.z.boolean(),
 });
 exports.default = userValidationSchema;

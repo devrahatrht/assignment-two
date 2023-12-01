@@ -25,7 +25,7 @@ const getSingleUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, functi
     return result;
 });
 const deleteUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_model_1.UserModel.updateOne({ userId }, { isDeleted: true });
+    const result = yield user_model_1.UserModel.deleteOne({ userId });
     return result;
 });
 const updateUserFromDB = (userId, users) => __awaiter(void 0, void 0, void 0, function* () {
