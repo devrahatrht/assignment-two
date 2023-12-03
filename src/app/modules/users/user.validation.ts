@@ -25,7 +25,10 @@ const addressValidationSchema = z.object({
 
 const userValidationSchema = z.object({
   userId: z.number({ required_error: 'User ID is required' }),
-  userName: z.string({ required_error: 'User name is required' }),
+  username: z.string({
+    required_error: 'username is required',
+    invalid_type_error: 'Username must be a string',
+  }),
   password: z.string({ required_error: 'Password is required' }),
   fullName: fullNameValidationSchema,
   age: z.number({ required_error: 'Age is required' }),

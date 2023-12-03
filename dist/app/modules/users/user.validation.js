@@ -23,7 +23,10 @@ const addressValidationSchema = zod_1.z.object({
 });
 const userValidationSchema = zod_1.z.object({
     userId: zod_1.z.number({ required_error: 'User ID is required' }),
-    userName: zod_1.z.string({ required_error: 'User name is required' }),
+    username: zod_1.z.string({
+        required_error: 'username is required',
+        invalid_type_error: 'Username must be a string',
+    }),
     password: zod_1.z.string({ required_error: 'Password is required' }),
     fullName: fullNameValidationSchema,
     age: zod_1.z.number({ required_error: 'Age is required' }),

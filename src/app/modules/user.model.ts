@@ -27,7 +27,7 @@ const userSchema = new Schema<User>({
     unique: true,
     message: 'UserId must be unique',
   },
-  userName: {
+  username: {
     type: String,
     required: true,
     unique: true,

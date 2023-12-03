@@ -37,7 +37,7 @@ const userSchema = new mongoose_1.Schema({
         unique: true,
         message: 'UserId must be unique',
     },
-    userName: {
+    username: {
         type: String,
         required: true,
         unique: true,

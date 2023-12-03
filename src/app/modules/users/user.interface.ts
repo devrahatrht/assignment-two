@@ -17,7 +17,7 @@ export type Address = {
 
 export type User = {
   userId: number;
-  userName: string;
+  username: string;
   password: string;
   fullName: FullName;
   age: number;
